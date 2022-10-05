@@ -27,6 +27,8 @@ const accountInputs = document.querySelectorAll(".account-input");
         },
         error :(error) => {
             alert("회원가입 요청 실패"); //실패시에 실행될 메소드
+
+            console.log(error.responseJSON);
         }
     });
 
