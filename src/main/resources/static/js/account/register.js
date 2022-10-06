@@ -25,11 +25,27 @@ const accountInputs = document.querySelectorAll(".account-input");
         success: (response) => {            //성공 시 실행 될 메소드
             alert("회원가입 성공");
         },
-        error :(error) => {
-            alert("회원가입 요청 실패"); //실패시에 실행될 메소드
+        error :(error) => {  //실패시에 실행될 메소드
+           // alert("회원가입 요청 실패");
 
-            console.log(error.responseJSON);
+            console.log(error.responseJSON.data);  // validation error cmDTO 중에 DATA만 가져오겠다..
+            loadErrorMessage(error.responseJSON.data);
         }
     });
-
 }
+
+    function loadErrorMessage(errors) {  // 에러들을 가져와서 에러를 반복시킬거다
+        const errorList = document.querySelector(".errors");
+        const errorMsgs = document.querySelector(".error-msgs");
+        const errorArray = Object.values(errors);
+
+        errorMsgs.innerHTML = "";  // 초기화
+
+        errorArray.forEach(error => {
+            errorMsgs.innerHTML += `
+            <li>${error}</li>
+            `;
+        });
+
+        errorList.classList.remove("errors-invisible");
+    }
