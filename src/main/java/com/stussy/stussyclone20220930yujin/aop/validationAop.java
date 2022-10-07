@@ -34,7 +34,7 @@ public class validationAop {
             BeanPropertyBindingResult bindingResult = null;
 
             for(Object arg :args) {
-                System.out.println(arg);
+           //     System.out.println(arg);
                 if(arg.getClass() == BeanPropertyBindingResult.class) {
                    bindingResult = (BeanPropertyBindingResult) arg;// 다운캐스팅
                     break;
@@ -45,10 +45,11 @@ public class validationAop {
             if(bindingResult.hasErrors()) {
                 Map<String, String> errorMap = new HashMap<String, String>();
                 List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-                for(FieldError fieldError : fieldErrors) {
-                    System.out.println("필드명: " + fieldError.getField());
-                    System.out.println("에러 메세지: " + fieldError.getDefaultMessage());
-                    errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
+               for(FieldError fieldError : fieldErrors) {
+//                    System.out.println("필드명: " + fieldError.getField());
+//                    System.out.println("에러 메세지: " + fieldError.getDefaultMessage());
+//                    errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
+                   // 로그 떄문에 필요 없음
                 }
 
                 throw new CustomValidationException("Validation Error", errorMap);

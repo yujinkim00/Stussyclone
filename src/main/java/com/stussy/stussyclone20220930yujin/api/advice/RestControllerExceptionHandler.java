@@ -17,6 +17,7 @@ public class RestControllerExceptionHandler {
 
         return ResponseEntity.badRequest().body(new CMRespDto<>(e.getMessage(),e.getErrorMap()));
     // api : 위 형식대로 받으면 json 형식으로 받아 올수 있다. { 안에 msg : ----  ,data : --- 형식 안깨진다. }
+        //badRequest() OR ok()
     }
 
 

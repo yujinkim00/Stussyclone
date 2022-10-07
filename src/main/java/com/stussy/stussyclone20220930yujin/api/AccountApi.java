@@ -1,5 +1,6 @@
 package com.stussy.stussyclone20220930yujin.api;
 
+import com.stussy.stussyclone20220930yujin.aop.annotation.LogAspect;
 import com.stussy.stussyclone20220930yujin.dto.CMRespDto;
 import com.stussy.stussyclone20220930yujin.dto.RegisterReqDto;
 import com.stussy.stussyclone20220930yujin.dto.validation.ValidationSequence;
@@ -21,8 +22,10 @@ import java.util.Map;
 @RestController
 public class AccountApi {
 
+    @LogAspect
     @PostMapping("/register")  // ReqMapping 주소가 앞에 붙는다.
-    public ResponseEntity<?> register(@Validated(ValidationSequence.class) @RequestBody RegisterReqDto registerReqDto, BindingResult bindingResult) {
+    public ResponseEntity<?> register(@Validated(ValidationSequence.class)
+                                          @RequestBody RegisterReqDto registerReqDto, BindingResult bindingResult) {
 
         return ResponseEntity.created(null).body(new CMRespDto<>("회원가입성공", registerReqDto));
     }
