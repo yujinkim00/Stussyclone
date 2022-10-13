@@ -1,8 +1,10 @@
 package com.stussy.stussyclone20220930yujin.dto;
 
 
+import com.stussy.stussyclone20220930yujin.domain.User;
 import com.stussy.stussyclone20220930yujin.dto.validation.ValidationGroups;
 import lombok.Data;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -31,4 +33,14 @@ public class RegisterReqDto {
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[~!@#$%^&*_])[a-zA-Z\\d-~!@#$%^&*_]*$", message = "비밀번호는 특수기호, 영문, 숫자를 모두 포함해야합니다."
             , groups = ValidationGroups.PatternCheckGroup.class)
     private String password;
+
+    public User toEntity () {
+        return User.builder()
+                .email(email)
+                .password(new BCryptPasswordEncoder().encode(password))
+                .name(firstName + lastName)
+                .role_id(1)
+                .build();
+
+    }
 }

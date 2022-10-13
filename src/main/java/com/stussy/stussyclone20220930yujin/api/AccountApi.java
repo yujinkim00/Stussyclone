@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.List;
@@ -32,9 +33,10 @@ public class AccountApi {
     public ResponseEntity<?> register(@Validated(ValidationSequence.class)
                                           @RequestBody RegisterReqDto registerReqDto, BindingResult bindingResult)throws Exception {
 
+        accountService.duplicateEmail(registerReqDto);
         accountService.register(registerReqDto);
 
-        return ResponseEntity.created(null).body(new CMRespDto<>("회원가입성공", registerReqDto));
+        return ResponseEntity.created(URI.create("/account/login")).body(new CMRespDto<>("회원가입 성공", registerReqDto.getEmail()));
     }
 
 }

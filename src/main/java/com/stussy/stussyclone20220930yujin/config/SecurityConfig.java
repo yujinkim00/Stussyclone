@@ -25,7 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll() // 전부 허가해라 .. 그래서 css image 다 가져 올수 있는거다
                 .and() // 그리고
                 .formLogin() // 인증 요청이 들어오면
-                .loginPage("/account/login")  // 이 페이지로 보내라
+                .loginPage("/account/login")  // 이 페이지로 보내라  login gage Get 요청
+                .loginProcessingUrl("/account/login") //로그인 service post 요청
                 .defaultSuccessUrl("/index"); // 갈데가 없을때 보낸다?
 
     }
