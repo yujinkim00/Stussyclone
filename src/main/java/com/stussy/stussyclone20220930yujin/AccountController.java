@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AccountController {
 
     @GetMapping("/account/login")  // 내가 원하는 이름 ..?
-    public String login(Model model, @RequestParam @Nullable String email){
+    public String login(Model model,
+                        @RequestParam @Nullable String email,
+                        @RequestParam @Nullable String error){
         model.addAttribute("email", email == null ? "" : email);
+        model.addAttribute("error", error == null ? "" : error);
         return "account/login";
     }
 
     @GetMapping("/account/register")
-    public String register(){
+    public String register(RegisterReqDto registerReqDto){
         return "account/register"; //뷰에 줄 파일이름이다.. 앞에 / 필요없음.??
 
     }

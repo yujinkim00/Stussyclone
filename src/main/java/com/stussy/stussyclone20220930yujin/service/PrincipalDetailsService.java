@@ -1,5 +1,10 @@
 package com.stussy.stussyclone20220930yujin.service;
 
+import com.stussy.stussyclone20220930yujin.domain.User;
+import com.stussy.stussyclone20220930yujin.exception.CustomInternalServerErrorException;
+import com.stussy.stussyclone20220930yujin.repository.AccountRepository;
+import com.stussy.stussyclone20220930yujin.security.PrincipalDetails;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,12 +13,25 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class PrincipalDetailsService implements UserDetailsService {
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("loadUserByUsername: {}", username);
+    private final AccountRepository accountRepository;
 
-        return null;
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = null;
+
+        try {
+            user = accountRepository.findUserByEmail(email);
+        } catch (Exception e) {
+            throw new CustomInternalServerErrorException("회원 정보 조회 오류");
+        }
+
+        if(user == null) {
+            throw new UsernameNotFoundException("잘못된 사용자 정보");
+        }
+
+        return new PrincipalDetails(user);
     }
 }
