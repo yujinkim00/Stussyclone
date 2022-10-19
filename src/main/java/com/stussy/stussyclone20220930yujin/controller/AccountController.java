@@ -1,4 +1,4 @@
-package com.stussy.stussyclone20220930yujin;
+package com.stussy.stussyclone20220930yujin.controller;
 
 import com.stussy.stussyclone20220930yujin.dto.RegisterReqDto;
 import org.springframework.lang.Nullable;

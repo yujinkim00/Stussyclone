@@ -19,13 +19,15 @@ import java.util.Map;
 @Component
 public class validationAop {
 
-    @Pointcut("execution(* com.stussy.stussyclone20220930yujin..*Api.*(..))")
-    //*모든 메소드에 적용해라. get* get으로 시작하는 메소드 적용, set* set으로 시작 하는,  *.*는 모든 클래스
-    // *api.* api로 끝나는 클래스 모두
-    // 패키지 는 지우고 ..으로 하면 하위 모든 패키지 적용.
-    private void executionPointCut() {}
+//    @Pointcut("execution(* com.stussy.stussyclone20220930yujin..*Api.*(..))")
+//    //*모든 메소드에 적용해라. get* get으로 시작하는 메소드 적용, set* set으로 시작 하는,  *.*는 모든 클래스
+//    // *api.* api로 끝나는 클래스 모두
+//    // 패키지 는 지우고 ..으로 하면 하위 모든 패키지 적용.
+//    private void executionPointCut() {}
+    @Pointcut("@annotation(com.stussy.stussyclone20220930yujin.aop.annotation.ValidAspect)")
+    private void annotationPointCut() { }
 
-        @Around("executionPointCut()")
+        @Around("annotationPointCut()")
         public Object around(ProceedingJoinPoint joinPoint) throws Throwable {  // 예외 미루기..?
 
             Object[] args = joinPoint.getArgs();  // 원래 메소드에서 쓰던 매개변수 object[] 로 가져오기
