@@ -7,22 +7,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 public class AccountController {
 
-    @GetMapping("/account/login")  // 내가 원하는 이름 ..?
+    @GetMapping("/account/login")
     public String login(Model model,
                         @RequestParam @Nullable String email,
-                        @RequestParam @Nullable String error){
+                        @RequestParam @Nullable String error) {
         model.addAttribute("email", email == null ? "" : email);
         model.addAttribute("error", error == null ? "" : error);
+
         return "account/login";
     }
-
     @GetMapping("/account/register")
-    public String register(RegisterReqDto registerReqDto){
-        return "account/register"; //뷰에 줄 파일이름이다.. 앞에 / 필요없음.??
+    public String register(RegisterReqDto registerReqDto) {
 
+        return "account/register";
     }
 }

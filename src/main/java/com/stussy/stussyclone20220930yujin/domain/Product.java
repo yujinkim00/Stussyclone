@@ -1,15 +1,14 @@
 package com.stussy.stussyclone20220930yujin.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Product {
     private int id;
     private String pdt_name;
@@ -20,10 +19,4 @@ public class Product {
     private String pdt_option_info;
     private String pdt_management_info;
     private String pdt_shipping_info;
-
-    public Product toEntity() {
-        return Product.builder()
-                .build();
-    }
-
 }

@@ -11,10 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 public class User {
-
     private String id;
+
     private String email;
     private String password;
     private String name;
@@ -24,6 +23,5 @@ public class User {
     private LocalDateTime update_date;
 
     private Role role;
-
 
 }

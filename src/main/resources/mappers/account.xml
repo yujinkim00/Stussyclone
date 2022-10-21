@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="com.stussy.stussyclone20220930yujin.repository.AccountRepository">
 
     <resultMap id="role" type="com.stussy.stussyclone20220930yujin.domain.Role">
@@ -12,52 +11,51 @@
         <result property="create_date" column="create_date"/>
         <result property="update_date" column="update_date"/>
     </resultMap>
-
+    <!--    property = 변수명-->
     <resultMap id="user" type="com.stussy.stussyclone20220930yujin.domain.User">
         <result property="id" column="id"/>
         <result property="email" column="email"/>
         <result property="password" column="password"/>
         <result property="name" column="name"/>
+        <result property="provider" column="provider"/>
         <result property="role_id" column="role_id"/>
         <result property="create_date" column="create_date"/>
         <result property="update_date" column="update_date"/>
-        <collection property="role" resultMap="role"/>
+        <collection property="role" resultMap="role"/> <!--여기 안에 role이 포함되어 있다.-->
+
     </resultMap>
 
-
-    <select id="findUserByEmail" parameterType="String" resultMap="user">
+    <select id="findUserByEmail" parameterType="String" resultMap="user"> <!--  join하면 무조건 resultMap-->
         select
-            um.id,
-            um.email,
-            um.password,
-            um.name,
-            um.provider,
-            um.role_id,
-            rm.name as role_name,
-            um.create_date,
-            um.update_date
+        um.id,
+        um.email,
+        um.password,
+        um.name,
+        um.provider,
+        um.role_id,
+        rm.name as role_name,
+        um.create_date,
+        um.update_date
         from
-            user_mst um
-            left outer join role_mst rm on(rm.id = um.role_id)
+        user_mst um
+        left outer join role_mst rm on(rm.id = um.role_id)
         where
-            um.email = #{email}
+        um.email = #{email}
     </select>
 
+    <!--    insert, update, delete 의 리턴값은 row갯수라서 항상 int-->
     <insert id="saveUser" parameterType="com.stussy.stussyclone20220930yujin.domain.User">
         insert into
-            user_mst
+        user_mst
         values(
-            0,
-            #{email},
-            #{password},
-            #{name},
-            #{provider},
-            #{role_id},
-            now(),
-            now()
+        0,
+        #{email},
+        #{password},
+        #{name},
+        #{provider},
+        #{role_id},
+        now(),
+        now()
         )
     </insert>
-
-
-
 </mapper>

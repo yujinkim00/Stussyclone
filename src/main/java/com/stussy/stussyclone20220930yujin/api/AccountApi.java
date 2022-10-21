@@ -16,27 +16,24 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/api/account")
-@RestController
+@RestController //@Controller + @ResponseBody
 @RequiredArgsConstructor
 public class AccountApi {
 
     private final AccountService accountService;
 
-    @LogAspect
-    @PostMapping("/register")  // ReqMapping 주소가 앞에 붙는다.
-    public ResponseEntity<?> register(@Validated(ValidationSequence.class)
-                                          @RequestBody RegisterReqDto registerReqDto, BindingResult bindingResult)throws Exception {
+    @LogAspect //여기에 aop 적용해라
+    @PostMapping("/register")              //@RequestBody : json으로 받기 //@Valid : 유효성 검사
+    public ResponseEntity<?> register(@Validated(ValidationSequence.class) @RequestBody RegisterReqDto registerReqDto, BindingResult bindingResult) throws Exception {
 
         accountService.duplicateEmail(registerReqDto);
         accountService.register(registerReqDto);
 
-        return ResponseEntity.created(URI.create("/account/login")).body(new CMRespDto<>("회원가입 성공", registerReqDto.getEmail()));
+        return ResponseEntity.created(URI.create("/account/login")).body(new CMRespDto<>("회원가입 성공", registerReqDto.getEmail())); //아이디 바로 입력 가능하게 해줌
     }
-
 }

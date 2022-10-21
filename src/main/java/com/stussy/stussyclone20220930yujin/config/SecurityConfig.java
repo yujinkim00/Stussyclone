@@ -29,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests() // 권한 관련 모든 요청이 들어오면
                 .antMatchers("/account/mypage","/index")  // 지정한 요 주소로 요청이 들어오면
                 .authenticated() //인증을 거쳐라
-                .antMatchers("/admin/**")
-                .hasRole("ADMIN")
+//                .antMatchers("/admin/**")
+//                .hasRole("ADMIN")
                 .anyRequest() //다른 요청들은
                 .permitAll() // 전부 허가해라 .. 그래서 css image 다 가져 올수 있는거다
                 .and() // 그리고
