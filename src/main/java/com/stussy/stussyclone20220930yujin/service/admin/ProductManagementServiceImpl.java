@@ -1,4 +1,4 @@
-package com.stussy.stussyclone20220930yujin.service;
+package com.stussy.stussyclone20220930yujin.service.admin;
 
 import com.stussy.stussyclone20220930yujin.dto.admin.CategoryResponseDto;
 import com.stussy.stussyclone20220930yujin.dto.admin.ProductRegisterReqDto;
@@ -28,10 +28,9 @@ public class ProductManagementServiceImpl implements ProductManagementService {
 
     @Override
     public void registerMst(ProductRegisterReqDto productRegisterReqDto) throws Exception{
-        if(productManagementRepository.saveProductMst(productRegisterReqDto.toEntity()) == 0){ //insert 안 되면
-            throw new CustomInternalServerErrorException("상품 등록 실패"); //이 에러를 띄워라.
+        if(productManagementRepository.saveProductMst(productRegisterReqDto.toEntity()) == 0) {
+            throw new CustomInternalServerErrorException("상품 등록 실패");
         }
-
     }
 
 }
