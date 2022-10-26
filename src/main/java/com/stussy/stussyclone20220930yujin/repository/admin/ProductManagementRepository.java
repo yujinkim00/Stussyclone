@@ -1,8 +1,6 @@
 package com.stussy.stussyclone20220930yujin.repository.admin;
 
-import com.stussy.stussyclone20220930yujin.domain.OptionProductMst;
-import com.stussy.stussyclone20220930yujin.domain.Product;
-import com.stussy.stussyclone20220930yujin.domain.ProductCategory;
+import com.stussy.stussyclone20220930yujin.domain.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,4 +12,9 @@ public interface ProductManagementRepository {
 
     public List<OptionProductMst> getProductMstList() throws Exception;
 
+    public List<OptionsProductSize> getSizeList(int productId) throws Exception;
+
+    public int findProductColor(ProductDetail productDetail) throws Exception;
+
+    public int saveProductDtl(ProductDetail productDetail) throws Exception;
 }
