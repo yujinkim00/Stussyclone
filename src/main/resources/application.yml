@@ -21,5 +21,3 @@ mybatis:
     - /mappers/*.xml
 
 
-file:
-  path: C:/junil/kyj/springboot/stussy-clone-20220930-yujin/src/main/resources/static/upload/
