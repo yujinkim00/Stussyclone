@@ -21,5 +21,4 @@ public class ProductRespDto {
     private Map<String, List<Map<String, Object>>> pdtColors;
     private List<String> pdtImgs;
 
-
 }
