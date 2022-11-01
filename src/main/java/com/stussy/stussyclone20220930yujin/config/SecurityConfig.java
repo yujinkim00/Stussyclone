@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.httpBasic().disable();  // 첫 로그인 화면 안쓰겟다
         http.authorizeRequests() // 권한 관련 모든 요청이 들어오면
-                .antMatchers("/account/mypage","/index")  // 지정한 요 주소로 요청이 들어오면
+                .antMatchers("/account/mypage","/index","/checkout")  // 지정한 요 주소로 요청이 들어오면
                 .authenticated() //인증을 거쳐라
 //                .antMatchers("/admin/**")
 //                .hasRole("ADMIN")
