@@ -16,5 +16,4 @@ public class CheckoutRespDto {
     private String sizeName;
     private String saveName;
 
-
 }

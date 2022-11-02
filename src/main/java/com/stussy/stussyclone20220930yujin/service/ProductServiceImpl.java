@@ -87,6 +87,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public CheckoutRespDto getCheckoutProduct(int pdtDtlId) throws Exception {
-        return null;
+        return productRepository.getPaymentProduct(pdtDtlId).toDto();
     }
 }

@@ -14,7 +14,7 @@ class AddressApi {
             oncomplete: function(data) {
                 const addressZonecode = document.querySelector(".address-zonecode");
                 const addressSido = document.querySelector(".address-sido");
-                const addressSigungu = document.querySelector(".address-sigugun");
+                const addressSigungu = document.querySelector(".address-sigungu");
                 const addressAll = document.querySelector(".address-all");
 
                 addressZonecode.value = data.zonecode;

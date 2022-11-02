@@ -2,6 +2,8 @@ package com.stussy.stussyclone20220930yujin.config;
 
 import com.stussy.stussyclone20220930yujin.dto.CMRespDto;
 import com.stussy.stussyclone20220930yujin.security.AuthFailureHandler;
+import com.stussy.stussyclone20220930yujin.service.PrincipalOauth2Service;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,8 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 // 기존거 치우고 내가 만든 이거를 따라라..
+
+    private final PrincipalOauth2Service principalOauth2Service;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -39,7 +44,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/account/login")  // 이 페이지로 보내라  login gage Get 요청
                 .loginProcessingUrl("/account/login") //로그인 service post 요청
                 .failureHandler(new AuthFailureHandler())
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(principalOauth2Service)
+                .and()
                 .defaultSuccessUrl("/index"); // 갈데가 없을때 보낸다?
-
     }
 }
