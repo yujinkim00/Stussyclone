@@ -63,4 +63,14 @@
         now()
         )
     </insert>
+
+    <update id="updateProvider" parameterType="com.stussy.stussyclone20220930yujin.domain.User">
+        update
+            user_mst
+        set
+            provider = #{provider},
+            update_date = now()
+        where
+            id = #{id}
+    </update>
 </mapper>
